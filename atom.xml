@@ -2,18 +2,46 @@
 
 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
-    <title type="text">Hugo 主题 MemE</title>
+    <title type="text">湾湾小舟港</title>
     <subtitle type="html">MemE 是一个强大且可高度定制的 GoHugo 博客主题，专为个人博客设计。</subtitle>
-    <updated>2020-05-14T21:17:16+08:00</updated>
-    <id>https://example.com/</id>
-    <link rel="alternate" type="text/html" href="https://example.com/" />
-    <link rel="self" type="application/atom+xml" href="https://example.com/atom.xml" />
+    <updated>2020-05-15T17:52:31+08:00</updated>
+    <id>https://duan-zhou.github.io/</id>
+    <link rel="alternate" type="text/html" href="https://duan-zhou.github.io/" />
+    <link rel="self" type="application/atom+xml" href="https://duan-zhou.github.io/atom.xml" />
     <author>
-            <name>reuixiy</name>
-            <uri>https://example.com/</uri>
+            <name>duan-zhou</name>
+            <uri>https://duan-zhou.github.io/</uri>
             
-                <email>reuixiy@gmail.com</email>
+                <email>duan_zhou@outlook.com</email>
             </author>
     <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights>
     <generator uri="https://gohugo.io/" version="0.70.0">Hugo</generator>
+        <entry>
+            <title type="text">hugo&#43;meme主题构建gitub pages</title>
+            <link rel="alternate" type="text/html" href="https://duan-zhou.github.io/posts/hugo_github/" />
+            <id>https://duan-zhou.github.io/posts/hugo_github/</id>
+            <updated>2020-05-14T22:21:41+08:00</updated>
+            <published>2020-05-14T22:20:05+08:00</published>
+            <author>
+                    <name>duan-zhou</name>
+                    <uri>https://duan-zhou.github.io/</uri>
+                    <email>duan_zhou@outlook.com</email>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html"><![CDATA[======]]></summary>
+            
+                <content type="html"><![CDATA[<p>======</p>
+]]></content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                
+            
+        </entry>
+    
 </feed>

@@ -7,26 +7,51 @@
 
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Hugo 主题 MemE</title>
-        <link>https://example.com/</link>
+        <title>湾湾小舟港</title>
+        <link>https://duan-zhou.github.io/</link>
         <description>MemE 是一个强大且可高度定制的 GoHugo 博客主题，专为个人博客设计。</description>
         <generator>Hugo 0.70.0 https://gohugo.io/</generator>
         
             <language>zh-CN</language>
         
         
-            <managingEditor>reuixiy@gmail.com (reuixiy)</managingEditor>
+            <managingEditor>duan_zhou@outlook.com (duan-zhou)</managingEditor>
         
         
-            <webMaster>reuixiy@gmail.com (reuixiy)</webMaster>
+            <webMaster>duan_zhou@outlook.com (duan-zhou)</webMaster>
         
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Thu, 14 May 2020 21:17:16 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 15 May 2020 17:52:31 +0800</lastBuildDate>
         
-            <atom:link rel="self" type="application/rss+xml" href="https://example.com/rss.xml" />
+            <atom:link rel="self" type="application/rss+xml" href="https://duan-zhou.github.io/rss.xml" />
         
+        
+            <item>
+                <title>hugo&#43;meme主题构建gitub pages</title>
+                <link>https://duan-zhou.github.io/posts/hugo_github/</link>
+                <guid isPermaLink="true">https://duan-zhou.github.io/posts/hugo_github/</guid>
+                <pubDate>Thu, 14 May 2020 22:20:05 +0800</pubDate>
+                
+                    <author>duan_zhou@outlook.com (duan-zhou)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description><![CDATA[<p>======</p>
+]]></description>
+                
+                
+                
+                
+                
+                    
+                        
+                    
+                        
+                    
+                
+            </item>
         
     </channel>
 </rss>
