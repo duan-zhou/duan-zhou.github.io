@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">湾湾小舟港</title>
     <subtitle type="html">MemE 是一个强大且可高度定制的 GoHugo 博客主题，专为个人博客设计。</subtitle>
-    <updated>2020-05-15T18:00:22+08:00</updated>
+    <updated>2020-05-15T18:09:27+08:00</updated>
     <id>https://duan-zhou.github.io/</id>
     <link rel="alternate" type="text/html" href="https://duan-zhou.github.io/" />
     <link rel="self" type="application/atom+xml" href="https://duan-zhou.github.io/atom.xml" />
@@ -17,19 +17,41 @@
     <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights>
     <generator uri="https://gohugo.io/" version="0.70.0">Hugo</generator>
         <entry>
-            <title type="text">hugo&#43;meme主题构建gitub pages</title>
-            <link rel="alternate" type="text/html" href="https://duan-zhou.github.io/posts/hugo_github/" />
-            <id>https://duan-zhou.github.io/posts/hugo_github/</id>
-            <updated>2020-05-14T22:21:41+08:00</updated>
-            <published>2020-05-14T22:20:05+08:00</published>
+            <title type="text">Build Github Pages with Hugo and MemE theme</title>
+            <link rel="alternate" type="text/html" href="https://duan-zhou.github.io/posts/blog_build/" />
+            <id>https://duan-zhou.github.io/posts/blog_build/</id>
+            <updated>2020-05-15T18:00:11+08:00</updated>
+            <published>2020-05-15T16:30:21+08:00</published>
             <author>
                     <name>duan-zhou</name>
                     <uri>https://duan-zhou.github.io/</uri>
                     <email>duan_zhou@outlook.com</email>
                     </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html"><![CDATA[======]]></summary>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html"><![CDATA[Build Github Pages with Hugo and MemE theme Three types of Github Pages (official guide) project  domain name: xxxx.github.io/&quot;project_name&quot; source location: docs directory or gh-pages branch of project (settings of repository)  user  domain name: xxx.github.io source location: xxx/xxx.github.io, only can be master branch  organization My scheme  a blog repository xxx/xxx.]]></summary>
             
-                <content type="html"><![CDATA[<p>======</p>
+                <content type="html"><![CDATA[<h1 id="build-github-pages-with-hugo-and-meme-theme">Build Github Pages with Hugo and MemE theme</h1>
+<h2 id="three-types-of-github-pages-official-guidehttpshelpgithubcomengithubworking-with-github-pages">Three types of Github Pages (<a href="https://help.github.com/en/github/working-with-github-pages">official guide</a>)</h2>
+<h3 id="project">project</h3>
+<ul>
+<li>domain name: <code>xxxx.github.io/&quot;project_name&quot;</code></li>
+<li>source location: <code>docs</code> directory or <code>gh-pages</code> branch of project (settings of repository)</li>
+</ul>
+<h3 id="user">user</h3>
+<ul>
+<li>domain name: <code>xxx.github.io</code></li>
+<li>source location: <code>xxx/xxx.github.io</code>, only can be master branch</li>
+</ul>
+<h3 id="organization">organization</h3>
+<h2 id="my-scheme">My scheme</h2>
+<ol>
+<li>a <code>blog</code> repository</li>
+<li><code>xxx/xxx.github.io</code> as <code>public</code> directory</li>
+<li><code>Hugo</code> build static html files in <code>public</code> directory</li>
+<li>push the <code>public</code> and <code>blog</code> repository</li>
+</ol>
+<h2 id="hugo-install-and-usagehttpsgithubcomgohugoiohugo"><a href="https://github.com/gohugoio/hugo">Hugo install and usage</a></h2>
+<h2 id="memehttpsgithubcomreuixiyhugo-theme-meme"><a href="https://github.com/reuixiy/hugo-theme-meme%60">MemE</a></h2>
+<p>Note: copy the <code>data/Soicals.toml</code> to your <code>data</code> directory and modify it.</p>
 ]]></content>
             
             

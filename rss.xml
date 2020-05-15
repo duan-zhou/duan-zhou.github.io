@@ -23,22 +23,44 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Fri, 15 May 2020 18:00:22 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 15 May 2020 18:09:27 +0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss+xml" href="https://duan-zhou.github.io/rss.xml" />
         
         
             <item>
-                <title>hugo&#43;meme主题构建gitub pages</title>
-                <link>https://duan-zhou.github.io/posts/hugo_github/</link>
-                <guid isPermaLink="true">https://duan-zhou.github.io/posts/hugo_github/</guid>
-                <pubDate>Thu, 14 May 2020 22:20:05 +0800</pubDate>
+                <title>Build Github Pages with Hugo and MemE theme</title>
+                <link>https://duan-zhou.github.io/posts/blog_build/</link>
+                <guid isPermaLink="true">https://duan-zhou.github.io/posts/blog_build/</guid>
+                <pubDate>Fri, 15 May 2020 16:30:21 +0800</pubDate>
                 
                     <author>duan_zhou@outlook.com (duan-zhou)</author>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
                 
-                    <description><![CDATA[<p>======</p>
+                    <description><![CDATA[<h1 id="build-github-pages-with-hugo-and-meme-theme">Build Github Pages with Hugo and MemE theme</h1>
+<h2 id="three-types-of-github-pages-official-guidehttpshelpgithubcomengithubworking-with-github-pages">Three types of Github Pages (<a href="https://help.github.com/en/github/working-with-github-pages">official guide</a>)</h2>
+<h3 id="project">project</h3>
+<ul>
+<li>domain name: <code>xxxx.github.io/&quot;project_name&quot;</code></li>
+<li>source location: <code>docs</code> directory or <code>gh-pages</code> branch of project (settings of repository)</li>
+</ul>
+<h3 id="user">user</h3>
+<ul>
+<li>domain name: <code>xxx.github.io</code></li>
+<li>source location: <code>xxx/xxx.github.io</code>, only can be master branch</li>
+</ul>
+<h3 id="organization">organization</h3>
+<h2 id="my-scheme">My scheme</h2>
+<ol>
+<li>a <code>blog</code> repository</li>
+<li><code>xxx/xxx.github.io</code> as <code>public</code> directory</li>
+<li><code>Hugo</code> build static html files in <code>public</code> directory</li>
+<li>push the <code>public</code> and <code>blog</code> repository</li>
+</ol>
+<h2 id="hugo-install-and-usagehttpsgithubcomgohugoiohugo"><a href="https://github.com/gohugoio/hugo">Hugo install and usage</a></h2>
+<h2 id="memehttpsgithubcomreuixiyhugo-theme-meme"><a href="https://github.com/reuixiy/hugo-theme-meme%60">MemE</a></h2>
+<p>Note: copy the <code>data/Soicals.toml</code> to your <code>data</code> directory and modify it.</p>
 ]]></description>
                 
                 
