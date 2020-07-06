@@ -7,7 +7,7 @@
       <!-- Enable responsiveness on mobile devices-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-      <title></title>
+      <title> - RPC的一种实现思路</title>
 
       
 
@@ -105,30 +105,27 @@
             <main>
                 <div class="content" id="mobile-panel">
                     
-                        <div class="posts">
-                            
-                                <article class="post">
-                                    
-    <header class="post__header">
-        <h1 class="post__title">
-            <a href="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;paxos&#x2F;">对Paxos算法的理解</a>
-        </h1>
-        <div class="post__meta">
-            <span class="post__time">2020-07-06</span>
-            
-        </div>
-    </header>
 
-                                    <div class="post__summary">
-                                        
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;paxos&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                                <article class="post">
-                                    
+
+<div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content always-active">
+        <nav id="TableOfContents">
+            <ul>
+                
+                <li>
+                    <a href="https://duan-zhou.github.io/rpcde-yi-ge-shi-xian-si-lu/#rpcde-yi-chong-shi-xian-si-lu" class="toc-link">RPC的一种实现思路</a>
+                    
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<article class="post">
+    
     <header class="post__header">
         <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;rpcde-yi-ge-shi-xian-si-lu&#x2F;">RPC的一种实现思路</a>
@@ -139,20 +136,46 @@
         </div>
     </header>
 
-                                    <div class="post__summary">
-                                        
-                                    </div>
-                                    <div class="read-more">
-                                        <a href="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;rpcde-yi-ge-shi-xian-si-lu&#x2F;">Read more...</a>
-                                    </div>
-                                </article>
-                            
-                        </div>
-                        <nav class="pagination">
-                            
-                            
-                        </nav>
+    <div class="post-content">
+      <h1 id="rpcde-yi-chong-shi-xian-si-lu">RPC的一种实现思路</h1>
+<p>RPC（Remoet Procedure Call）是指运行一段代码，可以远程调用一个函数，获得计算结果后返回。我在学习<a href="https://github.com/pingcap/talent-plan/blob/master/courses/dss/raft/README.md">Raft算法的Rust实现</a>时，课程提供方基于<code>channel</code>实现了一种简单的RPC，以下是我学习之后的一个简单总结。</p>
+<p>大概思路如下：</p>
+<ol>
+<li>先定义一个函数的输入及输出类型，并实现序列化和反序列化。</li>
+<li>定义一个网络中心Net，主要负责：创建client，在创建时同时创建（sender, reciever)，并将reciever给予client, 而sender在收到调用通知时给予server。</li>
+<li>在server端实现调用函数的主体部分，并返回定义好的输出类型。</li>
+<li>开始运行时，网络中心Net最先启动，然后创建client，并监听client发来的调用请求，然后调用相应的server函数，运行结束后用对应的sender返回结果。</li>
+</ol>
+<p>我觉得如果基于HTTP之类的协议，实现似乎更简单，因为不需要创建各种<code>channel</code>, 只需client发送正确的函数名和输入参数，server收到后调用并返回结果即可。</p>
+
+    </div>
+
+    
+    
+
+    <div class="post-footer">
+        
+            
+            
+                <div class="post-nav">
                     
+                    
+                        <a class="next" href="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;paxos&#x2F;">对Paxos算法的理解 ›</a>
+                    
+                    
+                    
+                </div>
+            
+
+        
+
+    </div>
+
+    
+    
+</article>
+
+
                 </div>
             </main>
 
