@@ -7,7 +7,7 @@
       <!-- Enable responsiveness on mobile devices-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-      <title> - 对Paxos算法的理解</title>
+      <title></title>
 
       
 
@@ -105,51 +105,10 @@
             <main>
                 <div class="content" id="mobile-panel">
                     
-
-
-<div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">Contents</h2>
-    <div class="post-toc-content always-active">
-        <nav id="TableOfContents">
-            <ul>
-                
-                <li>
-                    <a href="https://duan-zhou.github.io/paxos/#dui-paxossuan-fa-de-li-jie" class="toc-link">对Paxos算法的理解</a>
-                    
-                    <ul>
-                        
-                        <li>
-                            <a href="https://duan-zhou.github.io/paxos/#qian-yan" class="toc-link">前言</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://duan-zhou.github.io/paxos/#an-quan-xing" class="toc-link">安全性</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://duan-zhou.github.io/paxos/#suan-fa-ru-xia" class="toc-link">算法如下：</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://duan-zhou.github.io/paxos/#tui-dao-guo-cheng-wo-de-li-jie" class="toc-link">推导过程（我的理解）</a>
-                        </li>
-                        
-                        <li>
-                            <a href="https://duan-zhou.github.io/paxos/#paxossuan-fa-he-fu-zhi-zhuang-tai-ji" class="toc-link">Paxos算法和复制状态机</a>
-                        </li>
-                        
-                    </ul>
-                    
-                </li>
-                
-            </ul>
-        </nav>
-    </div>
-</div>
-
-
-<article class="post">
-    
+                        <div class="posts">
+                            
+                                <article class="post">
+                                    
     <header class="post__header">
         <h1 class="post__title">
             <a href="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;paxos&#x2F;">对Paxos算法的理解</a>
@@ -160,85 +119,20 @@
         </div>
     </header>
 
-    <div class="post-content">
-      <h1 id="dui-paxossuan-fa-de-li-jie">对Paxos算法的理解</h1>
-<h2 id="qian-yan">前言</h2>
-<p>​		当我去了解Raft算法时，大多数人都说Raft算法很简单，而且容易实现。可我去实现时，觉得还是有点难（原谅我实力有限），特别是选举限制、日志复制那些细节令我感到困惑。于是我又去看了看Paxos算法，我惊讶于它阅读起来的简单，正确性证明描述的简洁。可它还是让我有些困惑，我一直在想究竟是什么令我困惑，我想了很久，大概就是那个古老的话题—时间。有时我们必须站在每个节点的立场出发去思考过去、现在、将来，有时我们又需要一个上帝视角去思考问题。后来，我慢慢理解了Paxos算法描述的一个图像，也理解了为什么Paxos算法要有那些提议者、接收者的规定。当我再去看Raft算法时，我也渐渐明白了它的复杂性在于它将状态机之间的信息和Paxos算法的信息混合处理了，它将多次决议的多轮提案混合处理了，我甚至认为Raft其实还可以更简单点的。</p>
-<h2 id="an-quan-xing">安全性</h2>
-<p>​		存在<code>N</code>个进程，它们之间可以相互通信，但可能存在信息延迟或丢失的情况。现在有多个或至少一个进程提出一个请求,  请求其它进程把它提出的某个值<code>V</code> 写入进程自己中（<strong>持久化</strong>），提出请求的进程称作<strong>提议者(Proposer)</strong>， Proposer提出的请求称作<strong>提案(Proposal)</strong>，提案的内容是<code>V</code>, 收到请求的进程称作<strong>接收者(Acceptor)</strong>， acceptor如果同意proposer的提案，那么acceptor会把提案的内容<code>V</code>持久化并回复proposer。如果proposer收到超过一半的acceptor的同意，可以认为这个提案被<strong>选定</strong>，之后proposer会把这个提案的内容<code>V</code>告诉一个或多个外部的进程。这些外部的进程称作<strong>学习者(Learner)</strong>，learner一旦收到消息，那么就认为内部<code>N</code>个进程中已经有超过一半将某个提案的<code>V</code>持久化成功，或者说达成了某种共识。</p>
-<p>​		现在假设proposer1提出提案<code>V1</code> ， 并被选定，那么learner收到了<code>V1</code>。 可是如果acceptor只接受一次提案，那么<code>N</code>个进程可能无法达成共识，因此acceptor只能接受多个提案，并且只能最新的提案值<code>V</code>是有效的。之后可能又有proposer2提出提案<code>V2</code>，此时如果超过50%acceptor根据<strong>提案接受规则</strong>接受了<code>V2</code>, 那么learner这时收到了<code>V2</code>。<strong>安全性</strong>就是要求必须<code>V2=V1</code>, 也就是说一旦一个提案<code>V1</code>被选定了，后续被选定的提案<code>Vn</code>必须与<code>V1</code>是相同的。我们可以把对多轮提案投票的整个过程称作一次<strong>决议</strong>。</p>
-<p>​		acceptor是无法知道它当前接受的提案是否被选定，因此所有acceptor必须根据相同提案接受规则来决定收到的提案, acceptor也可以作为proposer 。Paxos算法就是一种提案提出和接受规则，来确保一次决议过程是安全的。</p>
-<h2 id="suan-fa-ru-xia">算法如下：</h2>
-<ol>
-<li>
-<p><strong>阶段1—提议者</strong>：取一个<strong>比自己所知的提案号大的提案号</strong>，把它发送给acceptor, 称作<strong>request</strong>阶段</p>
-</li>
-<li>
-<p><strong>阶段1—接收者</strong>：acceptor如果收到request阶段的一个提案号，如果它<strong>比自己所知的提案号大</strong>， 那么就回复该proposer，表示同意，该回复还要包括<strong>自己最新的持久化的值及它对应的提案号</strong></p>
-</li>
-<li>
-<p><strong>阶段2—提议者</strong>： proposer如果收到超过一半的acceptor的回复，那么proposer先确定提案值<code>V</code>, 这个值是回复中的提案号最大的那个值（可以包括自己持久化的值），如果没有，提议者可以任意设定。之后它把提案号及值<code>V</code>发送给<strong>所有进程</strong>, 称作<strong>proposing</strong> 阶段</p>
-</li>
-<li>
-<p><strong>阶段2—接收者</strong> : acceptor如果收到proposer proposing阶段的请求，如果提案号<strong>大于等于它所知道的提案号</strong>并且<strong>尚未持久化</strong>，那么就持久化，持久化完成后回复该proposer；</p>
-</li>
-<li>
-<p><strong>阶段3—提议者</strong>：proposer如果收到超过一半的持久化成功的回复，那么就把提案值<code>V</code>告诉learner，learner可以认为达成共识，之后learner收到的提案值<code>V</code>都确定是一致的。</p>
-</li>
-</ol>
-<p>说明：<strong>比自己所知的提案号大的提案号</strong></p>
-<p>​		一个进程无论作为proposer或者acceptor，它所知道的提案号有两个，一个是最新的持久化的提案号，一个是它最新收到的request阶段的提案号</p>
-<h2 id="tui-dao-guo-cheng-wo-de-li-jie">推导过程（我的理解）</h2>
-<img src="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;processed_images&#x2F;c3534027166d704100.png" />
-<p><code>R{i}</code>表示提案号<code>i</code>, <code>request</code>开始，箭头表示消息的传递，<code>P{i}</code>表示编号为<code>i</code>的提案形成，<code>V</code>表示持久化的值，</p>
-<p>一个完整的提案过程：</p>
-<img src="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;processed_images&#x2F;eb7cd3aed5368fca00.png" />
-<p>按上图举例说明：</p>
-<ol>
-<li><code>R4</code>表示request开始，</li>
-<li>之后传递到进程中，之后有超过50%的进程同意，</li>
-<li>提议者收到消息</li>
-<li>形成提案<code>P4</code>，值为<code>V2</code></li>
-<li>接收者收到proposing，持久化成功</li>
-<li>提议者收到超过一半的回复，通知学习者</li>
-</ol>
-<p><strong>然而，一个提案可能在任意阶段被打断，我们要做的就是从每个进程的角度出发，确保开启一个新的提案，直到获知提案已经完成。</strong></p>
-<ul>
-<li>Paxos算法首先假定了即使提案被打断，也要确保任何一个进程所经历的有效提案的时间顺序都是一致的，形成如图中的各种颜色的顺序，不可能出现部分进程P5先于P4发生，而其它进程P4先于P5的情况。因此无论提出提案还是接收提案都对提案号的大小有要求。</li>
-<li>然后Paxos的核心在于，P4如果已经被选定（<code>V2</code>持久化成功），那么P5要提出的值也必须是<code>V2</code>。如何要做到这点呢？其实比较简单，因为P4总是在P5之前发生，P5只要获取到P4持久化值的信息就可以了，P5可以在request阶段收集这个值<code>V2</code>，而<code>V2</code>这个值已经存在超过一半的acceptor中，所以P5收集到的持久化值中一定有<code>V2</code>，根据最新的提案号就可以找到它了。那有没有可能最新的提案号的的值不是<code>V2</code>呢？其实是不可能的，我们看P4的结束阶段，不等于<code>V2</code>的那些持久化值都是发生在P2之前，也就是说它们的提案号都小于P2。</li>
-<li>Paxos算法就像一个递归，P4是最初完成的提案，P5是下一轮有效提案，上面我们证明了如果P4持久化了<code>V</code>,那么P5一定会提出<code>V</code>(无论它是否有持久化过程)，之后的提案可以如此递归下去。</li>
-<li>可是还有从混乱到P4的过程，而且并不是所有进程都知道一个提案是否完成，也就说无论哪个过程，各个进程都是在执行相同的规则。当然，根据P4到P5的过程的规则，从混乱到P4的过程同样可以发生。因此，整个决议过程：混乱—&gt;P4—&gt;P5—&gt;....是可以真实发生的。</li>
-<li>Paxos算法何时结束呢？一个进程只有当它确定它持久化的值被选定，它才不会继续发起提案。因此，要么所有的进程都成功的发起了一次提案来判断它自己的结束，要么就是别的进程通知它。</li>
-</ul>
-<h2 id="paxossuan-fa-he-fu-zhi-zhuang-tai-ji">Paxos算法和复制状态机</h2>
-<p>​		Paxos算法中要持久化的值<code>V</code>是一个比较抽象的概念。在复制状态机中，如果我们把<code>V</code>对应成一次操作，持久化即意味着对状态机进行某个操作。那么尽管根据Paxos算法可以对某个操作达成共识，但是如果一开始复制状态机不一致，最终复制状态机还是不一致。</p>
-<p>​		在Paxos中，一次决议过程会有多个提案，进程可能对不同的值进行了多次持久化，可是那些值之间可能会有因果关系。 比如如果<code>V</code>对应一次操作，前后是有影响的。</p>
-<p>​		最后还有一个问题，那就是一次决议过程何时结束。结束就是最后一个节点知道了它持久化的值已经被选定了，不然它就会一直发起提案。而Raft算法的复杂性就来源于一次决议可能尚未结束，它就开起了下一轮决议，所以它一次Append过程要处理多个值，包括状态机的更新，多个不确定是否被选定的值。</p>
-<p>因此，我认为把共识和状态机分开处理更容易一些：</p>
-<ul>
-<li>当状态机不是最新时，不可参加Paxos共识算法的任何过程，而是尽可能的从其它节点更新自己的状态机。</li>
-<li>当状态机一次决议过程未完成时，必须先完成这次提案。比如一个leader收到一个写入操作，在复制给其它节点时出现故障，那么在它恢复后，先处理这次决议过程，对收到的下一个写入操作暂停处理。对于follower 而言，在它确定自己持久化的值被是否选定之前，不参与新一轮的决议过程。</li>
-</ul>
-
-    </div>
-
-    
-    
-
-    <div class="post-footer">
-        
-            
-            
-
-        
-
-    </div>
-
-    
-    
-</article>
-
-
+                                    <div class="post__summary">
+                                        
+                                    </div>
+                                    <div class="read-more">
+                                        <a href="https:&#x2F;&#x2F;duan-zhou.github.io&#x2F;paxos&#x2F;">Read more...</a>
+                                    </div>
+                                </article>
+                            
+                        </div>
+                        <nav class="pagination">
+                            
+                            
+                        </nav>
+                    
                 </div>
             </main>
 
