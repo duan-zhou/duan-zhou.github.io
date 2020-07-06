@@ -1,1 +1,2 @@
 User-agent: *
+Sitemap: https://duan-zhou.github.io/sitemap.xml
